@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HotelView: View {
     @StateObject var viewModel = HotelViewModel()
-
+    @State private var goToRoomList = false
     var body: some View {
         ScrollView {
             VStack{
@@ -20,7 +20,9 @@ struct HotelView: View {
                     HotelInfoView(hotel: hotel)
                     HotelDetailsView(hotelDescription: hotel.aboutTheHotel)
                     
-                    NavigationLink(destination: RoomSelectionView()) {
+                    Button(action: {
+                        self.goToRoomList = true
+                    }) {
                         Text("К выбору номера")
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -32,6 +34,9 @@ struct HotelView: View {
                     Text(errorMessage)
                 }
             }
+        }
+        .fullScreenCover(isPresented: $goToRoomList) {
+            RoomListView(hotelName: "Steigenberger Makadi")
         }
         .navigationTitle("Hotel Details")
         .onAppear {

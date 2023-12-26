@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct RoomListView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @StateObject var viewModel = RoomViewModel()
+    let hotelName: String
 
-#Preview {
-    RoomListView()
+    var body: some View {
+        List(viewModel.rooms) { room in
+            RoomCell(room: room)
+        }
+        .navigationTitle(hotelName)
+        .onAppear {
+            viewModel.fetchRooms()
+        }
+    }
 }

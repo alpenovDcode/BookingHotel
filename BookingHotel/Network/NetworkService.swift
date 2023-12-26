@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import Foundation
+import Alamofire
 
-struct NetworkService: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class NetworkService {
+    static let shared = NetworkService()
+    
+    func fetchHotel(completion: @escaping (Result<HotelModel, AFError>) -> Void) {
+        let url = "https://run.mocky.io/v3/d144777c-a67f-4e35-867a-cacc3b827473"
+        
+        AF.request(url).responseDecodable(of: HotelModel.self) { response in
+            completion(response.result)
+        }
     }
-}
-
-#Preview {
-    NetworkService()
 }
