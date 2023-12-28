@@ -15,6 +15,10 @@ class BookingDetailViewModel: ObservableObject {
     @Published var numberOfNights: String = ""
     @Published var roomType: String = ""
     @Published var nutrition: String = ""
+    @Published var tourPrice: Int = 0
+    @Published var fuelCharge: Int = 0
+    @Published var serviceCharge: Int = 0
+    var totalSum:Int = 0
     
     @Published var bookingDetail: BookingData?
 
@@ -43,6 +47,10 @@ class BookingDetailViewModel: ObservableObject {
         numberOfNights = "\(details.numberOfNights) ночей"
         roomType = details.room
         nutrition = details.nutrition
+        tourPrice = details.tourPrice
+        fuelCharge = details.fuelCharge
+        serviceCharge = details.serviceCharge
         bookingDetail = details
+        totalSum = details.fuelCharge + details.serviceCharge + details.tourPrice
     }
 }

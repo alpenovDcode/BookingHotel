@@ -11,8 +11,6 @@ struct HotelInfoView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            
-               
             Text(hotel.name)
                 .font(.custom("SF Pro Display", size: 22).weight(.medium))
                 .foregroundColor(.black)
@@ -29,7 +27,7 @@ struct HotelInfoView: View {
             HStack {
                 Text("от \(hotel.minimalPrice) ₽")
                     .font(
-                    Font.custom("SF Pro Display", size: 30)
+                    Font.custom("SF Pro Display", size: 25)
                     .weight(.semibold)
                     )
                     .foregroundColor(.black)

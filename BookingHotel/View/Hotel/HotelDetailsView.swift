@@ -16,8 +16,8 @@ struct HotelDetailsView: View {
                 .font(.custom("SF Pro Display", size: 22).weight(.medium))
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding([.leading, .trailing], 16)
-                .padding([.bottom,.top], 16)
+                .padding([.leading, .trailing], 4)
+                .padding([.bottom,.top], 4)
             
             VStack(spacing: 8) {
                 HStack(spacing: 8) {
@@ -35,7 +35,7 @@ struct HotelDetailsView: View {
                         .background(Color(red: 0.98, green: 0.98, blue: 0.99))
                         .cornerRadius(5)
                 }
-                .padding([.leading, .trailing], 16)
+                .padding([.leading, .trailing], 8)
                 
                 HStack(spacing: 8) {
                     Text("30 км до аэропорта")
@@ -52,19 +52,18 @@ struct HotelDetailsView: View {
                         .background(Color(red: 0.98, green: 0.98, blue: 0.99))
                         .cornerRadius(5)
                 }
-                .padding([.leading, .trailing], 16)
+                .padding([.leading, .trailing], 8)
             }
-            .padding([.top,.bottom], 8)
-            
-            
+            .padding([.top,.bottom], 6)
             
             Text(hotelDescription)
                 .font(.custom("SF Pro Display", size: 16))
                 .foregroundColor(.black.opacity(0.9))
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding([.leading, .trailing], 16)
+                .padding([.leading, .trailing], 8)
             
-            VStack(alignment: .trailing, spacing: 10){
+            
+            VStack(alignment: .trailing, spacing: 5){
                 InformationRowView(iconName: "smiley", text: "Удобства")
                 Image("Vector 56")
                     .frame(width: 275, height: 0)
@@ -83,9 +82,9 @@ struct HotelDetailsView: View {
                     )
                 InformationRowView(iconName: "xmark", text: "Что не включено")
             }
-            .padding(.top, 16)
-            .padding(.bottom, 28)
-            .padding([.leading, .trailing], 16)
+            .padding(.top, 8)
+            .padding(.bottom, 14)
+            .padding([.leading, .trailing], 8)
             .padding(15)
             .foregroundColor(.black)
             .background(Color(red: 0.98, green: 0.98, blue: 0.99))

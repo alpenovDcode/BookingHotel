@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RoomCell: View {
     let room: Room
+    @StateObject private var validationState = ValidationState()
     
     var body: some View {
         VStack{
@@ -54,7 +55,7 @@ struct RoomCell: View {
                 }
                 .padding([.leading, .trailing], 16)
                 
-                NavigationLink(destination: BookingView()) {
+                NavigationLink(destination: BookingView(validationState: validationState)) {
                     Text("Выбрать номер")
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
