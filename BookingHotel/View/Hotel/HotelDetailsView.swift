@@ -7,76 +7,91 @@
 import Foundation
 import SwiftUI
 
-
 struct HotelDetailsView: View {
-    let hotelDescription: HotelDescription
+    let hotelDescription: String
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("Об отеле")
-            
-                .font(
-                    Font.custom("SF Pro Display", size: 22)
-                        .weight(.medium)
-                )
+                .font(.custom("SF Pro Display", size: 22).weight(.medium))
                 .foregroundColor(.black)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.leading, .trailing], 16)
+                .padding([.bottom,.top], 16)
             
-                .frame(width: 343, alignment: .topLeading)
-            HStack {
-                Text("3-я линия")
-                    .font(Font.custom("SF Pro Display", size: 16).weight(.bold))
-                    .foregroundColor(Color(red: 0.51, green: 0.53, blue: 0.59))
-                    .background(Color(red: 0.98, green: 0.98, blue: 0.99))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .cornerRadius(5)
+            VStack(spacing: 8) {
+                HStack(spacing: 8) {
+                    Text("3-я линия")
+                        .font(Font.custom("SF Pro Display", size: 16).weight(.medium))
+                        .foregroundColor(Color(red: 0.51, green: 0.53, blue: 0.59))
+                        .padding(10)
+                        .background(Color(red: 0.98, green: 0.98, blue: 0.99))
+                        .cornerRadius(5)
+                    
+                    Text("Платный Wi-Fi в фойе")
+                        .font(Font.custom("SF Pro Display", size: 16).weight(.medium))
+                        .foregroundColor(Color(red: 0.51, green: 0.53, blue: 0.59))
+                        .padding(10)
+                        .background(Color(red: 0.98, green: 0.98, blue: 0.99))
+                        .cornerRadius(5)
+                }
+                .padding([.leading, .trailing], 16)
                 
-                Spacer()
-                
-                Text("Платный Wi-Fi в фойе")
-                    .font(Font.custom("SF Pro Display", size: 16).weight(.bold))
-                    .foregroundColor(Color(red: 0.51, green: 0.53, blue: 0.59))
-                    .background(Color(red: 0.98, green: 0.98, blue: 0.99))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .cornerRadius(5)
-                
+                HStack(spacing: 8) {
+                    Text("30 км до аэропорта")
+                        .font(Font.custom("SF Pro Display", size: 16).weight(.medium))
+                        .foregroundColor(Color(red: 0.51, green: 0.53, blue: 0.59))
+                        .padding(10)
+                        .background(Color(red: 0.98, green: 0.98, blue: 0.99))
+                        .cornerRadius(5)
+                    
+                    Text("1 км до пляжа")
+                        .font(Font.custom("SF Pro Display", size: 16).weight(.medium))
+                        .foregroundColor(Color(red: 0.51, green: 0.53, blue: 0.59))
+                        .padding(10)
+                        .background(Color(red: 0.98, green: 0.98, blue: 0.99))
+                        .cornerRadius(5)
+                }
+                .padding([.leading, .trailing], 16)
             }
-            .padding(10)
+            .padding([.top,.bottom], 8)
             
-            HStack {
-                Text("30 км до аэропорта")
-                    .font(Font.custom("SF Pro Display", size: 16).weight(.medium))
-                    .foregroundColor(Color(red: 0.51, green: 0.53, blue: 0.59))
-                    .background(Color(red: 0.98, green: 0.98, blue: 0.99))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .cornerRadius(5)
-                
-                
-                Spacer()
-                
-                Text("1 км до пляжа")
-                    .font(Font.custom("SF Pro Display", size: 16).weight(.medium))
-                    .foregroundColor(Color(red: 0.51, green: 0.53, blue: 0.59))
-                    .background(Color(red: 0.98, green: 0.98, blue: 0.99))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .cornerRadius(5)
-                
+            
+            
+            Text(hotelDescription)
+                .font(.custom("SF Pro Display", size: 16))
+                .foregroundColor(.black.opacity(0.9))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.leading, .trailing], 16)
+            
+            VStack(alignment: .trailing, spacing: 10){
+                InformationRowView(iconName: "smiley", text: "Удобства")
+                Image("Vector 56")
+                    .frame(width: 275, height: 0)
+                    .overlay(
+                        Rectangle()
+                            .stroke(Color(red: 0.51, green: 0.53, blue: 0.59).opacity(0.15), lineWidth: 1)
+                        
+                    )
+                InformationRowView(iconName: "checkmark", text: "Что включено")
+                Image("Vector 56")
+                    .frame(width: 275, height: 0)
+                    .overlay(
+                        Rectangle()
+                            .stroke(Color(red: 0.51, green: 0.53, blue: 0.59).opacity(0.15), lineWidth: 1)
+                        
+                    )
+                InformationRowView(iconName: "xmark", text: "Что не включено")
             }
-            .padding(10)
-            Text(hotelDescription.description)
-                .font(Font.custom("SF Pro Display", size: 16))
-                .lineSpacing(19.20)
-                .foregroundColor(Color.black.opacity(0.90))
-            
-            // Reusable view for the rows with icons
-            InformationRowView(iconName: "smiley", text: "Удобства")
-            InformationRowView(iconName: "checkmark", text: "Что включено")
-            InformationRowView(iconName: "xmark", text: "Что не включено")
-            
+            .padding(.top, 16)
+            .padding(.bottom, 28)
+            .padding([.leading, .trailing], 16)
+            .padding(15)
+            .foregroundColor(.black)
+            .background(Color(red: 0.98, green: 0.98, blue: 0.99))
+            .cornerRadius(15)
         }
+        .background(.white)
         .padding(.horizontal)
     }
 }

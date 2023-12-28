@@ -8,6 +8,7 @@
 import Foundation
 
 // Model to represent each room
+
 struct Room: Codable, Identifiable {
     let id: Int
     let name: String
@@ -23,3 +24,4 @@ struct Room: Codable, Identifiable {
         case imageUrls = "image_urls"
     }
 }
+

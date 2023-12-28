@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct ImageRoomCarousel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    let images: [String]
 
-#Preview {
-    ImageRoomCarousel()
+    var body: some View {
+        TabView {
+            ForEach(images, id: \.self) { imageUrl in
+                AsyncImage(url: URL(string: imageUrl)) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 343, height: 257)
+                        .clipped()
+                        .cornerRadius(15)
+                } placeholder: {
+                    Color.gray
+                }
+            }
+        }
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+        .frame(height: 250)
+    }
 }

@@ -5,18 +5,22 @@
 //  Created by Альпеша on 27.12.2023.
 //
 
-import SwiftUI
-import Foundation
+
+
+import Combine
 import Alamofire
 
-class NetworkService {
-    static let shared = NetworkService()
-    
-    func fetchHotel(completion: @escaping (Result<HotelModel, AFError>) -> Void) {
+class NetworkHotel {
+    static let shared = NetworkHotel()
+
+    func fetchHotel() -> AnyPublisher<HotelModel, Error> {
         let url = "https://run.mocky.io/v3/d144777c-a67f-4e35-867a-cacc3b827473"
-        
-        AF.request(url).responseDecodable(of: HotelModel.self) { response in
-            completion(response.result)
-        }
+        return AF.request(url)
+            .validate(statusCode: 200..<300)
+            .publishDecodable(type: HotelModel.self)
+            .value()
+            .mapError { $0 as Error }
+            .eraseToAnyPublisher()
     }
 }
+

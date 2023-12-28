@@ -7,12 +7,25 @@
 
 import SwiftUI
 
-struct TouristInformationView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+struct Tourist: Identifiable {
+    let id = UUID()
+    var firstName: String = ""
+    var lastName: String = ""
+    var birthDate: Date = Date()
+    var passportNumber: String = ""
+    // Add other fields as necessary
 }
 
-#Preview {
-    TouristInformationView()
+struct TouristInformationView: View {
+    @Binding var tourist: Tourist
+    var body: some View {
+        VStack(alignment: .leading) {
+            TextField("First Name", text: $tourist.firstName)
+            TextField("Last Name", text: $tourist.lastName)
+            DatePicker("Birth Date", selection: $tourist.birthDate, displayedComponents: .date)
+            TextField("Passport Number", text: $tourist.passportNumber)
+            // Add other input fields as necessary
+        }
+        .padding()
+    }
 }

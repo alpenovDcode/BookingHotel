@@ -4,6 +4,7 @@ target 'BookingHotel' do
   use_frameworks!
   
   pod 'Alamofire', '~> 5.6'
+  pod 'PhoneNumberKit', '~> 3.6'
 end
 
 post_install do |installer|

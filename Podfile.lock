@@ -1,16 +1,25 @@
 PODS:
   - Alamofire (5.8.1)
+  - PhoneNumberKit (3.7.6):
+    - PhoneNumberKit/PhoneNumberKitCore (= 3.7.6)
+    - PhoneNumberKit/UIKit (= 3.7.6)
+  - PhoneNumberKit/PhoneNumberKitCore (3.7.6)
+  - PhoneNumberKit/UIKit (3.7.6):
+    - PhoneNumberKit/PhoneNumberKitCore
 
 DEPENDENCIES:
   - Alamofire (~> 5.6)
+  - PhoneNumberKit (~> 3.6)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - PhoneNumberKit
 
 SPEC CHECKSUMS:
   Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
+  PhoneNumberKit: 3c68a822bad955ffcefc72a52df72b6596498555
 
-PODFILE CHECKSUM: 91fab6b1d723c864994f50a4bdaf76d0713a30b9
+PODFILE CHECKSUM: c88b4046a34c07eb06b503cc027aa6f0c903752d
 
 COCOAPODS: 1.14.3

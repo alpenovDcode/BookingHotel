@@ -4,15 +4,33 @@
 //
 //  Created by Альпеша on 28.12.2023.
 //
-
+import Foundation
 import SwiftUI
 
 struct PricingBlockView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    let tourPrice: Int
+    let fuelCharge: Int
+    let serviceCharge: Int
+    
+    var total: Int {
+        tourPrice + fuelCharge + serviceCharge
     }
-}
-
-#Preview {
-    PricingBlockView()
+    
+    var body: some View {
+        VStack {
+            Text("Tour Price: \(tourPrice)₽")
+            Text("Fuel Charge: \(fuelCharge)₽")
+            Text("Service Charge: \(serviceCharge)₽")
+            Text("Total: \(total)₽")
+                .bold()
+            Button("Pay \(total)₽") {
+                // Payment logic goes here
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+        }
+        .padding()
+    }
 }

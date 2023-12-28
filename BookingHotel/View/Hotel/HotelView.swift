@@ -6,44 +6,51 @@
 //
 
 import SwiftUI
+import SwiftUI
 
 struct HotelView: View {
     @StateObject var viewModel = HotelViewModel()
-    @State private var goToRoomList = false
+    
     var body: some View {
-        ScrollView {
-            VStack{
-                if viewModel.isLoading {
-                    ProgressView()
-                } else if let hotel = viewModel.hotel {
-                    ImageCarouselView(images: hotel.imageUrls)
-                    HotelInfoView(hotel: hotel)
-                    HotelDetailsView(hotelDescription: hotel.aboutTheHotel)
-                    
-                    Button(action: {
-                        self.goToRoomList = true
-                    }) {
-                        Text("К выбору номера")
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
+        NavigationStack {
+            ScrollView {
+                VStack {
+                    if viewModel.isLoading {
+                        ProgressView()
+                    } else if let hotel = viewModel.hotel {
+                        
+                        ImageCarouselView(images: hotel.imageUrls)
+                        HotelInfoView(hotel: hotel)
+                        Divider()
+                        HotelDetailsView(hotelDescription: hotel.aboutTheHotel.description)
+                        
+                        NavigationLink(destination: RoomListView()) {
+                            Text("К выбору номера")
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .padding()
+                                .foregroundColor(.white)
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                        }
+                        .padding([.leading, .trailing], 16)
+                        .frame(width: 375, height: 88)
+                        .background(.white)
+                        .overlay(
+                            Rectangle()
+                                .inset(by: -0.5)
+                                .stroke(Color(red: 0.91, green: 0.91, blue: 0.93), lineWidth: 1)
+                            
+                        )
+                    } else if let errorMessage = viewModel.errorMessage {
+                        Text(errorMessage)
                     }
-                } else if let errorMessage = viewModel.errorMessage {
-                    Text(errorMessage)
                 }
+                .background(Color.white)
             }
-        }
-        .fullScreenCover(isPresented: $goToRoomList) {
-            RoomListView(hotelName: "Steigenberger Makadi")
-        }
-        .navigationTitle("Hotel Details")
-        .onAppear {
-            viewModel.fetchHotelData()
+            .navigationBarTitle("Отель", displayMode: .inline)
+            .navigationBarHidden(false) // Отображаем навигационную панель
+            .background(Color.white)
         }
     }
 }
-#Preview {
-    HotelView()
-}
+

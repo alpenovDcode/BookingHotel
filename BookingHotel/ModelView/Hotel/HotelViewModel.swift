@@ -5,30 +5,36 @@
 //  Created by Альпеша on 26.12.2023.
 //
 
+import Combine
 import Foundation
-import Alamofire
 
 class HotelViewModel: ObservableObject {
     @Published var hotel: HotelModel?
     @Published var isLoading = false
     @Published var errorMessage: String?
     
+    private var cancellables = Set<AnyCancellable>()
+    
     init() {
         fetchHotelData()
     }
-    
+
     func fetchHotelData() {
+        print("Fetching hotel data...")
         isLoading = true
-        NetworkService.shared.fetchHotel { [weak self] result in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                switch result {
-                case .success(let hotelData):
-                    self?.hotel = hotelData
+        NetworkHotel.shared.fetchHotel()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                switch completion {
+                case .finished:
+                    self?.isLoading = false
                 case .failure(let error):
-                    self?.errorMessage = error.errorDescription
+                    self?.isLoading = false
+                    self?.errorMessage = error.localizedDescription
                 }
+            } receiveValue: { [weak self] hotelData in
+                self?.hotel = hotelData
             }
-        }
+            .store(in: &cancellables)
     }
 }

@@ -27,7 +27,8 @@ struct ImageCarouselView: View {
                 }
             }
         }
+        .background(Color.white)
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-        .frame(height: 250)
+        .frame(width: 343, height: 257)
     }
 }

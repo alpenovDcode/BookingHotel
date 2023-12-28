@@ -5,17 +5,34 @@
 //  Created by Альпеша on 27.12.2023.
 //
 
+
 import SwiftUI
+import Combine
 
 struct RoomListView: View {
     @StateObject var viewModel = RoomViewModel()
-    let hotelName: String
-
+    
     var body: some View {
-        List(viewModel.rooms) { room in
-            RoomCell(room: room)
+        NavigationStack {
+            ScrollView {
+                if viewModel.isLoading {
+                    ProgressView()
+                } else if let errorMessage = viewModel.errorMessage{
+                    Text(errorMessage)
+                } else {
+                    ForEach(viewModel.rooms, id: \.id) { room in
+                        VStack(spacing: 10) {
+                            ImageCarouselView(images: room.imageUrls)
+                            RoomCell(room: room)
+                        }
+                        .listRowInsets(EdgeInsets())
+                        .background(Color.clear)
+                    }
+                    .listStyle(PlainListStyle())
+                }
+            }
         }
-        .navigationTitle(hotelName)
+        .navigationTitle("Rooms")
         .onAppear {
             viewModel.fetchRooms()
         }

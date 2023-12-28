@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
+import Combine
+import Alamofire
 
-struct BookingViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class BookingViewModel: ObservableObject {
+    @Published var bookingDetails: BookingData?
+    private var cancellable: AnyCancellable?
+    
+    func fetchBookingDetails() {
+        let url = "https://run.mocky.io/v3/63866c74-d593-432c-af8e-f279d1a8d2ff"
+        cancellable = AF.request(url)
+            .publishDecodable(type: BookingData.self)
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] response in
+                      self?.bookingDetails = response.value
+                  })
     }
-}
-
-#Preview {
-    BookingViewModel()
 }
