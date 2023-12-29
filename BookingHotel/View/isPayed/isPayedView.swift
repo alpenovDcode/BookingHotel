@@ -9,9 +9,15 @@ import SwiftUI
 
 struct isPayedView: View {
     
-    var random_ID: Int {
-            return Int.random(in: 100000...999999)
-        }
+    
+    var randomID: Int {
+        generateRandomID()
+    }
+    
+    func generateRandomID() -> Int {
+        return Int.random(in: 100000...999999)
+    }
+    
     
     var body: some View {
         NavigationStack {
@@ -20,16 +26,20 @@ struct isPayedView: View {
                 HeaderSection(title: "Отель")
                     .padding(0)
                     .padding(.bottom, -16)
-
-                // Центральный раздел с текстом и значком
-                Spacer() // Пространство между Header и текстом
+                
+                
+                Spacer()
                 VStack {
-                    // Значок в круге
                     Text("🎉")
-                        .font(.system(size: 50))
-                        .background(Circle().foregroundColor(Color.blue))
-                        .padding(.bottom, 30) // Регулировка положения значка относительно текста
-
+                        .font(.system(size: 44))
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(
+                            RoundedRectangle(cornerRadius: 1000)
+                                .foregroundColor(Color(red: 0.96, green: 0.96, blue: 0.98))
+                                .frame(width:94,height: 94)
+                        )
+                        .padding(.bottom, 30)
                     VStack(alignment: .center, spacing: 20) {
                         Text("Ваш заказ принят в работу")
                             .font(
@@ -40,8 +50,8 @@ struct isPayedView: View {
                             .foregroundColor(.black)
                             .frame(width: 343, alignment: .top)
                             .padding(.bottom, 20)
-
-                        Text("Подтверждение заказа №\(random_ID) может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.")
+                        
+                        Text("Подтверждение заказа №\(randomID) может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.")
                             .font(Font.custom("SF Pro Display", size: 16))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color(red: 0.51, green: 0.53, blue: 0.59))
