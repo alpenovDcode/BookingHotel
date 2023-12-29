@@ -19,6 +19,11 @@ class HotelViewModel: ObservableObject {
         fetchHotelData()
     }
 
+    deinit {
+        cancellables.forEach { $0.cancel() }
+    }
+
+    
     func fetchHotelData() {
         print("Fetching hotel data...")
         isLoading = true

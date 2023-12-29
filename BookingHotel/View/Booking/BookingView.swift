@@ -49,6 +49,7 @@ struct BookingView: View {
                                             .padding([.leading, .trailing], 16)
                                             .background(Color.white)
                                             .cornerRadius(12)
+                                            
                                     }
                                 }
                             }

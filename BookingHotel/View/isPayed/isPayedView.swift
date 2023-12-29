@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct isPayedView: View {
+    
+    var random_ID: Int {
+            return Int.random(in: 100000...999999)
+        }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -36,7 +41,7 @@ struct isPayedView: View {
                             .frame(width: 343, alignment: .top)
                             .padding(.bottom, 20)
 
-                        Text("Подтверждение заказа №104893 может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.")
+                        Text("Подтверждение заказа №\(random_ID) может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.")
                             .font(Font.custom("SF Pro Display", size: 16))
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color(red: 0.51, green: 0.53, blue: 0.59))
