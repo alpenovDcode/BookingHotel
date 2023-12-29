@@ -1,1 +1,5 @@
-![Uploading Запись-экрана-2023-12-29-в-19.29.54.gif…]()
+Stack:
+-SwiftUI
+-MVVM
+-Combine
+-Alamofire, PhoneKit
